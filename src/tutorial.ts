@@ -123,3 +123,113 @@ function createUser(user: User): {
 
   return user;
 }
+
+type Book = { id: number; name: string; price: number };
+
+const book1: Book = {
+  id: 1,
+  name: 'how to cook a dragon',
+  price: 15,
+};
+
+const book2: Book = {
+  id: 2,
+  name: 'the secret life of unicorns',
+  price: 18,
+};
+
+const discountedBook: Book & { discount: number } = {
+  id: 3,
+  name: 'Gonomes vs. Goblins:The Ultimate Guide',
+  price: 18,
+  discount: 0.15,
+};
+
+// computed properties
+const propName = 'age';
+type Animal = {
+  [propName]: number;
+};
+
+let tiger: Animal = { [propName]: 5 };
+
+// interface method
+interface BookInterface {
+  readonly isbn: number;
+  title: string;
+  author: string;
+  genre?: string;
+  printAuthor(): void;
+  printTitle(message: string): string;
+  printSomething: (someVale: number) => number;
+}
+
+const deepWork: BookInterface = {
+  isbn: 123,
+  title: 'Deep work',
+  author: 'Cal Newport',
+  genre: 'self-development',
+  // if you want an arrow function, you need to access like deepwork.author
+  printAuthor() {
+    console.log(this.author);
+  },
+  printTitle(message) {
+    return `${this.title} ${message}`;
+  },
+  // First Option
+  // printSomething: function (someVale) {
+  //   return someVale;
+  // },
+  // Second Option
+  // printSomething: (someValue) => {
+  //   // In Arrow function, this keyword access the global variable unlike normal function
+  //   console.log(deepWork.author);
+  //   return someValue;
+  // },
+
+  // Third Option
+  printSomething(someVale) {
+    return someVale;
+  },
+};
+
+// deepWork.printAuthor();
+// const result2 = deepWork.printTitle('is awesome');
+// console.log(result2);
+
+// console.log(deepWork.printSomething(34));
+
+// Merge and extend
+interface PersonInterface {
+  name: string;
+  getDetails(): string;
+}
+
+interface DogOwner {
+  dogName: string;
+  getDogDetails(): string;
+}
+interface PersonInterface {
+  age: number;
+}
+const personOne: PersonInterface = {
+  name: 'John',
+  age: 37,
+  getDetails() {
+    return `Name: ${this.name}, Age: ${this.age}`;
+  },
+};
+
+interface BigPerson extends PersonInterface {
+  employeeId: number;
+}
+// console.log(personOne.age);
+const newPerson: BigPerson = {
+  name: 'Smith',
+  employeeId: 123,
+  age: 37,
+  getDetails() {
+    return `Name: ${this.name}, EmployId: ${this.employeeId}`;
+  },
+};
+console.log(newPerson.getDetails());

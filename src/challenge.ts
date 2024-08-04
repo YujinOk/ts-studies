@@ -95,4 +95,24 @@ const printStaffDetails = (staff: Staff) => {
     );
   }
 };
-console.log(printStaffDetails(bob));
+// console.log(printStaffDetails(bob));
+
+// interface challenge
+interface Computer {
+  readonly id: string;
+  brand: string;
+  ram: number;
+  storage?: number;
+  upgradeRam: (ramNum: number) => number;
+}
+
+const myComputer: Computer = {
+  id: '123',
+  brand: 'apple',
+  ram: 18,
+  upgradeRam: function (num: number): number {
+    this.ram += num;
+    return this.ram;
+  },
+};
+console.log(myComputer.upgradeRam(5));
