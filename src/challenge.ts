@@ -116,47 +116,72 @@
 //   },
 // };
 // console.log(myComputer.upgradeRam(5));
-function getEmployee(): Person | DogOwner | Manager {
-  const random = Math.random();
-  if (random < 0.33) {
-    return { name: "Yujin" };
-  } else if (random < 0.66) {
-    return {
-      name: "Sarah",
-      dogName: "rex",
-    };
-  } else {
-    return {
-      name: "Bob",
-      managePeople() {
-        console.log("manage Poeple");
-      },
-      delegateTasks() {
-        console.log("delegate taks");
-      },
-    };
-  }
+// function getEmployee(): Person | DogOwner | Manager {
+//   const random = Math.random();
+//   if (random < 0.33) {
+//     return { name: "Yujin" };
+//   } else if (random < 0.66) {
+//     return {
+//       name: "Sarah",
+//       dogName: "rex",
+//     };
+//   } else {
+//     return {
+//       name: "Bob",
+//       managePeople() {
+//         console.log("manage Poeple");
+//       },
+//       delegateTasks() {
+//         console.log("delegate taks");
+//       },
+//     };
+//   }
+// }
+// interface Person {
+//   name: string;
+// }
+
+// interface DogOwner extends Person {
+//   dogName: string;
+// }
+// interface Manager extends Person {
+//   managePeople: () => void;
+//   delegateTasks: () => void;
+// }
+
+// const employee: Person | DogOwner | Manager = getEmployee();
+// // console.log(employee.delegateTasks);
+
+// function isManager(obj: Person | DogOwner | Manager): obj is Manager {
+//   return "managePeople" in obj;
+// }
+// console.log(isManager(employee));
+
+// if (isManager(employee)) {
+//   console.log(employee.delegateTasks());
+// }
+
+enum UserRole {
+  Admin,
+  Manager,
+  Employee,
 }
-interface Person {
+
+type User = {
+  id: number;
   name: string;
-}
+  role: UserRole;
+  contact: [string, string];
+};
 
-interface DogOwner extends Person {
-  dogName: string;
-}
-interface Manager extends Person {
-  managePeople: () => void;
-  delegateTasks: () => void;
-}
+const createUser = (user: User): User => {
+  return user;
+};
 
-const employee: Person | DogOwner | Manager = getEmployee();
-// console.log(employee.delegateTasks);
-
-function isManager(obj: Person | DogOwner | Manager): obj is Manager {
-  return "managePeople" in obj;
-}
-console.log(isManager(employee));
-
-if (isManager(employee)) {
-  console.log(employee.delegateTasks);
-}
+const result = createUser({
+  id: 123,
+  name: "yujin",
+  role: UserRole.Employee,
+  contact: ["test@gmail.com", "010-0000-0000"],
+});
+console.log(result);
